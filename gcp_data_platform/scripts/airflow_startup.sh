@@ -34,4 +34,4 @@ echo "dbt-core==1.8.7" >> requirements.txt
 echo "dbt-bigquery==1.8.2" >> requirements.txt
 
 # Iniciar o Airflow em modo detached
-sudo astro dev start -d
+sudo astro dev start

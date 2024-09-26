@@ -1,6 +1,6 @@
 resource "google_compute_instance" "airflow_instance" {
   name         = "airflow-instance"
-  machine_type = "f1-micro"
+  machine_type = "e2-standard-2"
   zone         = var.zone
   
   # Adicionando labels
