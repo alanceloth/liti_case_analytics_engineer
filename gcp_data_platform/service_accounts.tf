@@ -12,3 +12,8 @@ resource "google_service_account" "metabase_sa" {
   account_id   = "metabase-sa"
   display_name = "Metabase Service Account"
 }
+
+resource "google_service_account" "mongodb_sa" {
+  account_id   = "mongodb-sa"
+  display_name = "MongoDB Service Account"
+}

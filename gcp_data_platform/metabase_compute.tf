@@ -3,6 +3,12 @@ resource "google_compute_instance" "metabase_instance" {
   machine_type = "f1-micro"
   zone         = var.zone
 
+  # Adicionando labels
+  labels = {
+    name       = "metabase_instance"
+    managed-by = "terraform"
+  }
+
   boot_disk {
     initialize_params {
       image = "debian-cloud/debian-11"

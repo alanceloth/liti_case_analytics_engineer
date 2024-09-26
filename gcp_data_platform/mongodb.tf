@@ -1,16 +1,15 @@
-resource "google_compute_instance" "airbyte_instance" {
-  name         = "airbyte-instance"
-  machine_type = "f1-micro" # Tipo de máquina menor
+resource "google_compute_instance" "mongodb_instance" {
+  name         = "mongodb-instance"
+  machine_type = "e2-micro" # Máquina pequena para o free tier
   zone         = var.zone
 
-  # Adicionando labels
   labels = {
-    name       = "airbyte_instance"
+    name       = "mongodb_instance"
     managed-by = "terraform"
   }
 
-  tags = ["airbyte", "terraform"]
-  
+  tags = ["mongodb", "terraform"]
+
   boot_disk {
     initialize_params {
       image = "debian-cloud/debian-11"
@@ -26,9 +25,9 @@ resource "google_compute_instance" "airbyte_instance" {
   }
 
   service_account {
-    email  = google_service_account.airbyte_sa.email
+    email  = google_service_account.mongodb_sa.email
     scopes = ["cloud-platform"]
   }
 
-  metadata_startup_script = file("scripts/airbyte_startup.sh")
+  metadata_startup_script = file("scripts/mongodb_startup.sh")
 }

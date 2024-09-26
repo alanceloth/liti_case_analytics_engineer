@@ -21,3 +21,31 @@ resource "google_compute_firewall" "allow_ssh_http" {
 
   source_ranges = ["0.0.0.0/0"]
 }
+
+resource "google_compute_firewall" "allow_mongodb_internal" {
+  name    = "allow-mongodb-internal"
+  network = google_compute_network.vpc_network.name
+
+  allow {
+    protocol = "tcp"
+    ports    = ["27017"]
+  }
+
+  source_tags = ["airbyte", "airflow"]
+  target_tags = ["mongodb"]
+}
+
+resource "google_compute_firewall" "allow_airflow" {
+  name    = "allow-airflow"
+  network = google_compute_network.vpc_network.name
+
+  allow {
+    protocol = "tcp"
+    ports    = ["8080"]
+  }
+
+  source_ranges = ["0.0.0.0/0"] # Em produção, restrinja ao seu IP
+
+  target_tags = ["airflow"] # Aplica-se a instâncias com a tag 'airflow'
+}
+

@@ -2,6 +2,16 @@ resource "google_compute_instance" "airflow_instance" {
   name         = "airflow-instance"
   machine_type = "f1-micro"
   zone         = var.zone
+  
+  # Adicionando labels
+  labels = {
+    name       = "airflow_instance"
+    managed-by = "terraform"
+  }
+
+  # Adicionando tags
+  tags = ["airflow", "terraform"]
+
 
   boot_disk {
     initialize_params {
