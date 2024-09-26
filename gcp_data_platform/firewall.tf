@@ -19,7 +19,7 @@ resource "google_compute_firewall" "allow_ssh_http" {
     ports    = ["22", "80", "443", "8000", "8080", "3000"]
   }
 
-  source_ranges = ["0.0.0.0/0"]
+  source_ranges = ["177.128.8.127/32"]
 }
 
 resource "google_compute_firewall" "allow_mongodb_internal" {
@@ -44,7 +44,7 @@ resource "google_compute_firewall" "allow_airflow" {
     ports    = ["22","8080"]
   }
 
-  source_ranges = ["0.0.0.0/0"] # Em produção, restrinja ao seu IP
+  source_ranges = ["177.128.8.127/32"]
 
   target_tags = ["airflow"] # Aplica-se a instâncias com a tag 'airflow'
 }
