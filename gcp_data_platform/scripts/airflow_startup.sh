@@ -26,7 +26,7 @@ mkdir -p /home/${USER}/airflow-project
 cd /home/${USER}/airflow-project
 
 # Inicializar um projeto Airflow usando o astro CLI
-astro dev init
+sudo astro dev init
 
 # Instalar o Cosmos e dependências do dbt
 echo "cosmos==0.4.0" >> requirements.txt
@@ -34,7 +34,7 @@ echo "dbt-core==1.5.0" >> requirements.txt
 echo "dbt-bigquery==1.5.0" >> requirements.txt
 
 # Construir a imagem Docker com as novas dependências
-astro dev docker-build
+sudo astro dev docker-build
 
 # Iniciar o Airflow em modo detached
-astro dev start -d
+sudo astro dev start -d
