@@ -29,9 +29,9 @@ cd /home/${USER}/airflow-project
 sudo astro dev init
 
 # Instalar o Cosmos e dependências do dbt
-echo "cosmos==0.4.0" >> requirements.txt
-echo "dbt-core==1.5.0" >> requirements.txt
-echo "dbt-bigquery==1.5.0" >> requirements.txt
+echo "astronomer-cosmos==1.6.0" >> requirements.txt
+echo "dbt-core==1.8.7" >> requirements.txt
+echo "dbt-bigquery==1.8.2" >> requirements.txt
 
 # Construir a imagem Docker com as novas dependências
 sudo astro dev docker-build
