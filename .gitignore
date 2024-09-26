@@ -8,6 +8,10 @@ __pycache__/
 
 *.exe
 variables.tf
+*.tfstate
+*.csv
+*.json
+*.pdf
 
 # Distribution / packaging
 .Python

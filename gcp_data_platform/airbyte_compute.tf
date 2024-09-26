@@ -1,6 +1,6 @@
 resource "google_compute_instance" "airbyte_instance" {
   name         = "airbyte-instance"
-  machine_type = "f1-micro" # Tipo de máquina menor
+  machine_type = "e2-standard-2" # Tipo de máquina menor
   zone         = var.zone
 
   # Adicionando labels
@@ -14,7 +14,7 @@ resource "google_compute_instance" "airbyte_instance" {
   boot_disk {
     initialize_params {
       image = "debian-cloud/debian-11"
-      size  = 10 # Tamanho mínimo do disco
+      size  = 20 # Tamanho mínimo do disco
     }
   }
 

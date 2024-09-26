@@ -78,7 +78,9 @@ sudo systemctl restart nginx
 # (Opcional: Se o UFW estiver instalado e ativo)
 # sudo ufw allow 'Nginx Full'
 
+sleep 10
+
 # Iniciar o Airflow
-astro dev start
+sudo astro dev start
 
 # Fim do script
