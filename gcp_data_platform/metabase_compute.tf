@@ -1,6 +1,6 @@
 resource "google_compute_instance" "metabase_instance" {
   name         = "metabase-instance"
-  machine_type = "f1-micro"
+  machine_type = "e2-standard-2"
   zone         = var.zone
 
   # Adicionando labels
@@ -12,7 +12,7 @@ resource "google_compute_instance" "metabase_instance" {
   boot_disk {
     initialize_params {
       image = "debian-cloud/debian-11"
-      size  = 10
+      size  = 20
     }
   }
 
@@ -20,7 +20,9 @@ resource "google_compute_instance" "metabase_instance" {
     network    = google_compute_network.vpc_network.id
     subnetwork = google_compute_subnetwork.subnet.id
 
-    access_config {}
+    access_config {
+      nat_ip = google_compute_address.metabase_ip.address
+    }
   }
 
   service_account {

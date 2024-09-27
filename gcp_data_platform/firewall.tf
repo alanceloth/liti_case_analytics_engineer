@@ -49,3 +49,15 @@ resource "google_compute_firewall" "allow_airflow" {
   target_tags = ["airflow"] # Aplica-se a instâncias com a tag 'airflow'
 }
 
+resource "google_compute_firewall" "allow_postgres_ingress" {
+  name    = "allow-postgres-ingress"
+  network = google_compute_network.vpc_network.name
+
+  allow {
+    protocol = "tcp"
+    ports    = ["5432"]
+  }
+
+  source_ranges = ["${google_compute_address.metabase_ip.address}/32"]
+  
+}
