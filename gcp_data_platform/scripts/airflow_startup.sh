@@ -83,4 +83,6 @@ sleep 10
 # Iniciar o Airflow
 sudo astro dev start
 
+gcloud pubsub topics publish vm-status-topic --message="VM $(hostname) pronta para uso às $(date)"
+
 # Fim do script

@@ -39,3 +39,5 @@ sudo systemctl restart nginx
 sleep 10
 
 sudo abctl local install --low-resource-mode --no-browser --insecure-cookies
+
+gcloud pubsub topics publish vm-status-topic --message="VM $(hostname) pronta para uso às $(date)"

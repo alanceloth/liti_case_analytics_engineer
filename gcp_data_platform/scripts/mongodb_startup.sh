@@ -33,3 +33,5 @@ mkdir -p /tmp/data
 
 # Importar os dados para o MongoDB
 mongoimport --db liti_db --collection weighins --file /tmp/data/weighins.json --jsonArray
+
+gcloud pubsub topics publish vm-status-topic --message="VM $(hostname) pronta para uso às $(date)"
