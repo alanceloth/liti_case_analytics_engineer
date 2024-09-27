@@ -22,8 +22,22 @@ resource "google_compute_firewall" "allow_ssh_http" {
   source_ranges = ["177.128.8.127/32"]
 }
 
-resource "google_compute_firewall" "allow_mongodb_internal" {
-  name    = "allow-mongodb-internal"
+# resource "google_compute_firewall" "allow_mongodb_internal" {
+#   name    = "allow-mongodb-internal"
+#   network = google_compute_network.vpc_network.name
+
+#   allow {
+#     protocol = "tcp"
+#     ports    = ["27017"]
+#   }
+#   source_ranges = ["${google_compute_address.airbyte_ip.address}/32"]
+
+#   source_tags = ["airbyte", "airflow"]
+#   target_tags = ["mongodb"]
+# }
+
+resource "google_compute_firewall" "allow_mongodb_ingress" {
+  name    = "allow-mongodb-ingress"
   network = google_compute_network.vpc_network.name
 
   allow {
@@ -31,9 +45,12 @@ resource "google_compute_firewall" "allow_mongodb_internal" {
     ports    = ["27017"]
   }
 
-  source_tags = ["airbyte", "airflow"]
-  target_tags = ["mongodb"]
+  # Permitir tráfego de qualquer IP (apenas para testes, depois restrinja)
+  source_ranges = ["0.0.0.0/0"]
+
+  target_tags   = ["mongodb"]
 }
+
 
 resource "google_compute_firewall" "allow_airflow" {
   name    = "allow-airflow"
@@ -66,16 +83,16 @@ resource "google_compute_firewall" "allow_postgres_ingress" {
   
 }
 
-resource "google_compute_firewall" "allow_mongodb_ingress" {
-  name    = "allow-mongodb-ingress"
-  network = google_compute_network.vpc_network.name
+# resource "google_compute_firewall" "allow_mongodb_ingress" {
+#   name    = "allow-mongodb-ingress"
+#   network = google_compute_network.vpc_network.name
 
-  allow {
-    protocol = "tcp"
-    ports    = ["27017"]
-  }
+#   allow {
+#     protocol = "tcp"
+#     ports    = ["27017"]
+#   }
 
-  source_ranges = ["${google_compute_address.airbyte_ip.address}/32"]
-  target_tags   = ["mongodb"]
-}
+#   source_ranges = ["${google_compute_address.airbyte_ip.address}/32"]
+#   target_tags   = ["mongodb"]
+# }
 

@@ -10,3 +10,9 @@ resource "google_storage_bucket" "data_lake" {
     managed-by = "terraform"
   }
 }
+
+resource "google_storage_bucket_iam_member" "mongodb_sa_access" {
+  bucket = "liti_case_analytics_engineer_filedump"
+  role   = "roles/storage.objectViewer"
+  member = "serviceAccount:${google_service_account.mongodb_sa.email}"
+}

@@ -17,6 +17,52 @@ sudo apt-get update
 # Instalar o MongoDB
 sudo apt-get install -y mongodb-org
 
+# Substituir o conteúdo do arquivo /etc/mongod.conf
+sudo bash -c 'cat > /etc/mongod.conf <<EOF
+#mongod.conf
+
+# for documentation of all options, see:
+#   http://docs.mongodb.org/manual/reference/configuration-options/
+
+# Where and how to store data.
+storage:
+  dbPath: /var/lib/mongodb
+#  engine:
+#  wiredTiger:
+
+# where to write logging data.
+systemLog:
+  destination: file
+  logAppend: true
+  path: /var/log/mongodb/mongod.log
+
+# network interfaces
+net:
+  port: 27017
+  bindIp: 0.0.0.0
+
+# how the process runs
+processManagement:
+  timeZoneInfo: /usr/share/zoneinfo
+
+# security:
+#  authorization: enabled
+
+#operationProfiling:
+
+replication:
+  replSetName: "rs0"
+
+#sharding:
+
+## Enterprise-Only Options:
+
+#auditLog:
+
+#snmp:
+EOF'
+
+
 # Iniciar o serviço do MongoDB
 sudo systemctl start mongod
 sudo systemctl enable mongod
@@ -26,12 +72,14 @@ mkdir -p /tmp/data
 
 # Baixar o arquivo weighins.json (substitua pela URL correta ou copie o arquivo)
 # Se o arquivo estiver em um bucket do GCS, use gsutil para copiar
- gsutil cp gs://liti_case_analytics_engineer_filedump/files/weighins.json /tmp/data/weighins.json
+gsutil cp gs://liti_case_analytics_engineer_filedump/files/weighins.json /tmp/data/weighins.json
 
 # Para este exemplo, assumiremos que o arquivo está disponível em uma URL pública
 #wget -O /tmp/data/weighins.json https://seu-endereco/weighins.json
 
 # Importar os dados para o MongoDB
 mongoimport --db liti_db --collection weighins --file /tmp/data/weighins.json --jsonArray
+
+mongosh --eval 'use admin; db.createUser({ user: "airbyte_user", pwd: "airbyte123", roles: [{ role: "readWrite", db: "liti_db" }] });'
 
 gcloud pubsub topics publish vm-status-topic --message="VM $(hostname) pronta para uso às $(date)"
