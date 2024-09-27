@@ -65,3 +65,17 @@ resource "google_compute_firewall" "allow_postgres_ingress" {
   ]
   
 }
+
+resource "google_compute_firewall" "allow_mongodb_ingress" {
+  name    = "allow-mongodb-ingress"
+  network = google_compute_network.vpc_network.name
+
+  allow {
+    protocol = "tcp"
+    ports    = ["27017"]
+  }
+
+  source_ranges = ["${google_compute_address.airbyte_ip.address}/32"]
+  target_tags   = ["mongodb"]
+}
+

@@ -23,6 +23,11 @@ resource "google_sql_database_instance" "postgres_instance" {
         name  = "airbyte-instance"
         value = google_compute_address.airbyte_ip.address
       }
+
+      authorized_networks {
+        name  = "Dev-Alan"
+        value = var.meu_ip
+      }
     }
   }
 }
