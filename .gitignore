@@ -12,6 +12,7 @@ variables.tf
 *.csv
 *.json
 *.pdf
+*.backup
 
 # Distribution / packaging
 .Python

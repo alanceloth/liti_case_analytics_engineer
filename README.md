@@ -51,6 +51,7 @@ Ajuste no .gitignore, removendo o variables.tf, e arquivos *.exe (evitar o uploa
 Subir a infraestrutura usando terraform
 - `terraform plan`
 - `terraform apply`
+(Airflow demora uns 7 min para o deploy, Airbyte uns 10 minutos, Metabase uns 4 minutos)
 
 Para testar se a conexão ssh está funcionando
 - `gcloud compute ssh <nome-da-instancia>`
@@ -71,6 +72,7 @@ No Airbyte, configurar a Source
 Adicionar os Streams abaixo na Source
 - Formato `CSV`
 - Nome `Customer`
+- Globs `files/customer.csv`
 - Input Schema
     ```
     {   "CustomerId": "string",   "customerGender": "string",   "customerHeight": "number",   "customerBirthDate": "string",   "originChannelGroup": "string",   "customerPlan": "string",   "activePlan": "string",   "isActive": "boolean",   "isActivePaid": "boolean",   "firstStartDate": "string",   "acquiredDate": "string",   "firstPaymentDate": "string",   "lastChargePaidDate": "string",   "churnDate": "string",   "customerInOnboarding": "boolean",   "customerDoctor": "string",   "customerNutritionist": "string",   "customerBesci": "string",   "customerCreatedAt": "string" }
@@ -120,9 +122,9 @@ Adicionar os Streams abaixo na Source
     ```
 
 
-Configurar um Destino
+Configurar um Destino para o Data Lake
 Conector `GCS`
-Nome `Google Cloud Storage (GCS)`
+Nome `GCS Data Lake - CSV`
 Autenticação:
 - Na tela de buckets, ir em `Configurações`, `Interoperabilidade`, e gerar uma chave HMAC para a conta de serviço.
 - Preencher os dados dela no conector
@@ -130,6 +132,33 @@ Configurar o destino `data-lake-bucket-liti-case-analytics-engineer`
 Path `raw/`
 Output format `CSV`
 Normalização `Root level flattening`
+
+Configurar o schema
+
+Realizar o Sync
+
+Os dados vão aparecer no bucket de destino, conferir.
+
+
+Configurar um Destino para o Data Lake
+Conector `GCS`
+Nome `GCS Data Lake - JSON`
+Configurar o destino `data-lake-bucket-liti-case-analytics-engineer`
+Path `raw/`
+Output format `JSON`
+
+Configurar o schema
+
+Realizar o Sync
+
+Os dados vão aparecer no bucket de destino, conferir.
+
+
+Configurar um Destino para o Postgres
+Conector `Postgres`
+Nome `Postgres`
+Host `<ip publico da instancia postgres>`
+Inserir nome do banco, usuario, senha
 
 Configurar o schema
 
