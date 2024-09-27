@@ -14,3 +14,13 @@ resource "google_compute_address" "metabase_ip" {
   name   = "metabase-ip"
   region = var.region
 }
+
+resource "google_compute_address" "airbyte_ip" {
+  name   = "airbyte-ip"
+  region = var.region
+}
+
+resource "google_compute_address" "airflow_ip" {
+  name   = "airflow-ip"
+  region = var.region
+}

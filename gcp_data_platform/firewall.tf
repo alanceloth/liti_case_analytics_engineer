@@ -58,6 +58,10 @@ resource "google_compute_firewall" "allow_postgres_ingress" {
     ports    = ["5432"]
   }
 
-  source_ranges = ["${google_compute_address.metabase_ip.address}/32"]
+  source_ranges = [
+    "${google_compute_address.metabase_ip.address}/32",
+    "${google_compute_address.airflow_ip.address}/32",
+    "${google_compute_address.airbyte_ip.address}/32",
+  ]
   
 }

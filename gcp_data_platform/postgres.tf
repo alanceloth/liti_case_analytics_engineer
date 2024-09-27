@@ -13,6 +13,16 @@ resource "google_sql_database_instance" "postgres_instance" {
         name  = "metabase-instance"
         value = google_compute_address.metabase_ip.address
       }
+
+      authorized_networks {
+        name  = "airflow-instance"
+        value = google_compute_address.airflow_ip.address
+      }
+
+      authorized_networks {
+        name  = "airbyte-instance"
+        value = google_compute_address.airbyte_ip.address
+      }
     }
   }
 }
