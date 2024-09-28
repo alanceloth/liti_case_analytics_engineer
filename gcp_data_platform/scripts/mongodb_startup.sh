@@ -63,9 +63,19 @@ replication:
 EOF'
 
 
-# Iniciar o serviço do MongoDB
-sudo systemctl start mongod
-sudo systemctl enable mongod
+# Reiniciar o MongoDB para aplicar as configurações
+sudo systemctl restart mongod
+
+# Criar o script temporário para inicializar o Replica Set
+cat <<EOF > /tmp/init_replica_set.js
+rs.initiate()
+EOF
+
+# Executar o script no MongoDB para iniciar o Replica Set
+mongosh < /tmp/init_replica_set.js
+
+# Remover o arquivo temporário
+rm /tmp/init_replica_set.js
 
 # Criar diretório temporário
 mkdir -p /tmp/data

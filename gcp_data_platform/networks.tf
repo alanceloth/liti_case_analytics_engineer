@@ -24,3 +24,8 @@ resource "google_compute_address" "airflow_ip" {
   name   = "airflow-ip"
   region = var.region
 }
+
+resource "google_compute_address" "mongodb_ip" {
+  name   = "mongodb-ip"
+  region = var.region
+}
