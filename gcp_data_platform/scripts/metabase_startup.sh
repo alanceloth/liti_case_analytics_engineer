@@ -53,6 +53,15 @@ sudo systemctl restart nginx
 
 sleep 10
 
+#Metabase
 sudo docker run --restart unless-stopped -d -p 3000:3000 -e MB_DB_TYPE -e MB_DB_DBNAME -e MB_DB_PORT -e MB_DB_USER -e MB_DB_PASS -e MB_DB_HOST metabase/metabase
+
+#Briefer
+sudo docker run --restart unless-stopped -d \
+  -p 3001:3000 \
+  -v briefer_psql_data:/var/lib/postgresql/data \
+  -v briefer_jupyter_data:/home/jupyteruser \
+  -v briefer_briefer_data:/home/briefer \
+  briefercloud/briefer
 
 gcloud pubsub topics publish vm-status-topic --message="VM $(hostname) pronta para uso às $(date)"
