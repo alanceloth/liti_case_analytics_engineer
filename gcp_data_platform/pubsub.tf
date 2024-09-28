@@ -36,3 +36,20 @@ resource "google_project_iam_member" "mongodb_pubsub_publisher" {
   role    = "roles/pubsub.publisher"
   member  = "serviceAccount:${google_service_account.mongodb_sa.email}"
 }
+
+# Pubsub para updates do DAG
+resource "google_pubsub_topic" "dag_updates" {
+  name = "dag-updates-topic"
+}
+
+resource "google_storage_notification" "dag_updates_notification" {
+  bucket = google_storage_bucket.airflow_dags.name
+
+  payload_format = "JSON_API_V1"
+
+  event_types = [
+    "OBJECT_FINALIZE"
+  ]
+
+  topic = google_pubsub_topic.dag_updates.id
+}

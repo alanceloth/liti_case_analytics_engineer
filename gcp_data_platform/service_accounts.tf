@@ -17,3 +17,8 @@ resource "google_service_account" "mongodb_sa" {
   account_id   = "mongodb-sa"
   display_name = "MongoDB Service Account"
 }
+
+resource "google_service_account" "cloud_function_sa" {
+  account_id   = "cloudfunction-sa"
+  display_name = "Conta de Serviço para Cloud Functions"
+}
