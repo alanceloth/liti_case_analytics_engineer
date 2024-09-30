@@ -1,3 +1,37 @@
+# Case Liti - Analytics Engineer
+## Como executar o projeto?
+### Setup inicial
+- Crie uma conta no Google Cloud Platform
+- Crie um usuário IAM (como o projeto utilizar diversos recursos, use a conta como proprietário, será mais fácil/simples definir as permissões. Se não, será necessário atribuir as permissões para cada recurso individualmente)
+- Baixe e instale o [Google Cloud CLI](https://cloud.google.com/sdk/docs/install)
+- Configure o seu acesso no CLI
+- Baixe e configure o [Terraform](https://developer.hashicorp.com/terraform/install?product_intent=terraform)
+- Se necessário o setup das variáveis de ambiente do Terraform, use esse [tutorial](https://stackoverflow.com/questions/1618280/where-can-i-set-path-to-make-exe-on-windows)
+- Se o Terraform e o Google Cloud CLI estiverem instalados, continuar nas etapas abaixo
+
+### Clonar o projeto e executar
+- `git clone https://github.com/alanceloth/liti_case_analytics_engineer.git`
+- `cd liti_case_analytics_engineer`
+- `code .`
+### Criado o ambiente virtual local
+- `git init`
+- `poetry env use 3.11.5`
+- `poetry shell`
+
+### Iniciar o projeto
+- `cd gcp_data_platform`
+- Validado a conexão do terraform com minha conta no GCP e instalado o provider do google
+    - `terraform init`
+    - `gcloud init`
+    - `gcloud auth application-default login`
+- Alterar/Criar o arquivo variables.tf com base no arquivo de exemplo
+- Subir a infraestrutura usando terraform
+    - `terraform plan`
+    - `terraform apply`
+
+No output, se tudo ocorrer bem, vai aparecer o IP externos das VMs do projeto. Acessar via SSH ou pelo navegador (airflow, metabase, airbyte)
+---
+## Walkthrough
 Inicializado o projeto com poetry
 - `poetry new liti_case_analytics_engineer`
 - `cd liti_case_analytics_engineer`
@@ -165,3 +199,10 @@ Configurar o schema
 Realizar o Sync
 
 Os dados vão aparecer no bucket de destino, conferir.
+
+---
+
+# Contato
+- [LinkedIn](https://www.linkedin.com/in/alanlanceloth/)
+- [GitHub](https://github.com/alanceloth/)
+- [alan.lanceloth@gmail.com](mailto:alan.lanceloth@gmail.com)
