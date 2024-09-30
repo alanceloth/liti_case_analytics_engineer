@@ -29,7 +29,7 @@
     - `terraform plan`
     - `terraform apply`
 
-No output, se tudo ocorrer bem, vai aparecer o IP externos das VMs do projeto. Acessar via SSH ou pelo navegador (airflow, metabase, airbyte)
+- No output, se tudo ocorrer bem, vai aparecer o IP externos das VMs do projeto. Acessar via SSH ou pelo navegador (airflow, metabase, airbyte)
 ---
 ## Walkthrough
 Inicializado o projeto com poetry
