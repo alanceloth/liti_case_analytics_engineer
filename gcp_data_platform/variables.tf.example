@@ -1,0 +1,29 @@
+variable "project" {
+  description = "GCP project ID"
+  default     = "ID DO SEU PROJETO NO GCP"
+}
+
+variable "region" {
+  description = "Região GCP elegível para o free tier"
+  default     = "us-west1" # Região elegível
+}
+
+variable "zone" {
+  description = "Zona GCP elegível para o free tier"
+  default     = "us-west1-b" # Zona elegível
+}
+
+variable "meu_ip" {
+  description = "Meu IP, obter usando o WhatsMyIP.com"
+  default     = "SEU IP/32"
+}
+
+variable "airflow_api_username" {
+  description = "User API do Airflow"
+  default     = "usuario"
+}
+
+variable "airflow_api_password" {
+  description = "Password API do Airflow"
+  default     = "senha"
+}
