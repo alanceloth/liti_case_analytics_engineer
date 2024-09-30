@@ -87,6 +87,10 @@ Subir a infraestrutura usando terraform
 - `terraform apply`
 (Airflow demora uns 7 min para o deploy, Airbyte uns 10 minutos, Metabase uns 4 minutos)
 
+Grafo
+![image](arquivos/graphviz.png)
+Gerado com o comando `terraform graph`
+
 Para testar se a conexão ssh está funcionando
 - `gcloud compute ssh <nome-da-instancia>`
 
@@ -199,6 +203,8 @@ Configurar o schema
 Realizar o Sync
 
 Os dados vão aparecer no bucket de destino, conferir.
+
+
 
 ---
 
