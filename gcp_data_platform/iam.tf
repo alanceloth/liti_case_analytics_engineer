@@ -70,7 +70,7 @@ resource "google_secret_manager_secret" "airflow_api_url" {
 
 resource "google_secret_manager_secret_version" "airflow_api_url_version" {
   secret      = google_secret_manager_secret.airflow_api_url.id
-  secret_data = "https://${google_compute_address.airflow_ip.address}/api/v1/dags/sync_dags/dagRuns"
+  secret_data = "http://${google_compute_address.airflow_ip.address}/api/v1/dags/sync_dags/dagRuns"
 }
 
 resource "google_storage_bucket_iam_member" "airflow_bucket_reader" {
